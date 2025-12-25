@@ -41,7 +41,7 @@ pipeline {
             steps {
                 sh '''
                     apk add --no-cache bash python3 py-pip
-                    pip install xmlrunner
+                    pip install xmlrunner --break-system-packages
                 '''
             }
         }
