@@ -40,7 +40,8 @@ pipeline {
         stage('Install deps') {
             steps {
                 sh '''
-                    apk add --no-cache bash python3 py3-unittest-xml-reporting
+                    apk add --no-cache bash python3 py-pip
+					pip install --break-system-packages unittest-xml-reporting
                 '''
             }
         }
