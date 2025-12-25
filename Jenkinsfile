@@ -40,8 +40,7 @@ pipeline {
         stage('Install deps') {
             steps {
                 sh '''
-                    apk add --no-cache bash python3 py-pip
-                    pip install xmlrunner --break-system-packages
+                    apk add --no-cache bash python3 py3-unittest-xml-reporting
                 '''
             }
         }
