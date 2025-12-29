@@ -72,8 +72,9 @@ pipeline {
         }
 
 		
-		
+
 		stage('Build Docker Image') {
+            agent docker 
             steps {
                 script {
                     sh 'docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} .'
@@ -83,7 +84,9 @@ pipeline {
         }
 		
 		stage('Push to Docker Hub') {
+            agent docker
             steps {
+            
                 script {
                     withCredentials([usernamePassword(credentialsId: DOCKER_CREDS_ID, passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
                         sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
@@ -95,6 +98,7 @@ pipeline {
         }
 		
 		stage('Cleanup') {
+            agent docker
              steps {
                  sh 'docker rmi ${DOCKER_IMAGE}:${BUILD_NUMBER} || true'
                  sh 'docker rmi ${DOCKER_IMAGE}:latest || true'
