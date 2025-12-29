@@ -71,13 +71,7 @@ pipeline {
             }
         }
 
-		stage('Install docker') {
-            steps {
-                sh '''
-                    apk add --no-cache docker
-                '''
-            }
-        }
+		
 		
 		stage('Build Docker Image') {
             steps {
